@@ -1,15 +1,14 @@
-import React from "react";
-
 const History = ({ history }) => {
     return (
-        <div className="history">
-            <div>
-                {history.map((entry, index) => (
-                <p key={index}>{entry}</p>
-                ))}
-            </div>
-        </div>
-    )
-}
-
-export default History;
+      <div>
+        {history.length > 0 ? (
+          <p>{history[history.length-1].split("=")[0]}</p>
+        ) : (
+          <p>No hay operaciones previas</p>
+        )}
+      </div>
+    );
+  };
+  
+  export default History;
+  
