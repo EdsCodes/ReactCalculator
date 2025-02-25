@@ -1,6 +1,6 @@
 const History = ({ history }) => {
     return (
-      <div>
+      <div className="rounded-top border-0 mt-2">
         {history.length > 0 ? (
           <p>{history[history.length-1].split("=")[0]}</p>
         ) : (

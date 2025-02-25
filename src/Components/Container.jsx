@@ -7,23 +7,41 @@ const Container = () => {
   const [input, setInput] = useState('');
   const [result, setResult] = useState(0);
   const [history, setHistory] = useState([]);
+  const [isNewOperation, setIsNewOperation] = useState(false);
 
   const addNumber = (value) => {
-    setInput(input + value);
+    if (isNewOperation) {
+      setInput(value);
+      setIsNewOperation(false);
+    } else {
+      setInput((prev) => prev + value);
+    }
   };
 
   const addOperator = (op) => {
-    if (input && !isNaN(input[input.length - 1])) {
+    if (!input && result !== 0) {
+      setInput(result.toString() + op);
+      setIsNewOperation(false);
+      return;
+    }
+    if (!input) return;
+
+    const lastChar = input[input.length - 1];
+    if (['+', '-', '*', '/'].includes(lastChar)) {
+      setInput(input.slice(0, -1) + op);
+    } else {
       setInput(input + op);
     }
   };
 
   const calculateResult = () => {
     try {
+      if (!input) return;
       const evaluatedResult = new Function(`return ${input}`)();
+      setHistory((prev) => [...prev, input]);
       setResult(evaluatedResult);
-      setHistory([...history, `${input} = ${evaluatedResult}`]);
-      setInput(evaluatedResult.toString()); 
+      setInput('');
+      setIsNewOperation(true);
     } catch (error) {
       alert('Error en la expresión');
     }
@@ -33,6 +51,7 @@ const Container = () => {
     setInput('');
     setResult(0);
     setHistory([]);
+    setIsNewOperation(false);
   };
 
   useEffect(() => {
@@ -53,10 +72,10 @@ const Container = () => {
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
     };
-  }, [input]);
+  }, [input, isNewOperation, result]);
 
   return (
-    <div className="marcoCalc container border border-black border-5 rounded-2 mt-3">
+    <div className="marcoCalc container rounded-2 mt-3">
       <div className="row">
         <div className="col bg-black">
           <History history={history} />

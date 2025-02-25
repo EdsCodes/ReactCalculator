@@ -2,13 +2,13 @@ import React from "react";
 
 const Results = ({ input, result, operator }) => {
   return (
-    <div className="container">
-      <div className="resultSquare rounded-2 m-2 mt-3">
-        <div className="subResultSquare rounded-4 w-90 m-1">
+    <div className="container rounded-bottom border-0">
+      <div className="resultSquare w-100">
+        <div className="subResultSquare rounded-4">
           <h6>
-            {input || operator ? `${input} ${operator || ''}` : '0'}
+            {input || operator ? `${input} ${operator || ''}` : ''}
           </h6>
-          <h4>{result !== undefined ? `= ${result}` : ''}</h4>
+          <h4 className="text-end">{result !== undefined ? ` ${result}` : ''}</h4>
         </div>
       </div>
     </div>
