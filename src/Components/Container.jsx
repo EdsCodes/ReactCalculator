@@ -77,7 +77,7 @@ const Container = () => {
   return (
     <div className="marcoCalc container rounded-2 mt-3">
       <div className="row">
-        <div className="col bg-black">
+        <div className="col bg-black rounded-4">
           <History history={history} />
           <Results input={input} result={result} />
           <Buttons addNumber={addNumber} addOperator={addOperator} calculateResult={calculateResult} clearNumbers={clearNumbers} />

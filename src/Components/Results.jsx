@@ -2,7 +2,7 @@ import React from "react";
 
 const Results = ({ input, result, operator }) => {
   return (
-    <div className="container rounded-bottom border-0">
+    <div className="container rounded-bottom border-0 bg-light">
       <div className="resultSquare w-100">
         <div className="subResultSquare rounded-4">
           <h6>
